@@ -7,13 +7,14 @@
 //
 
 #include <iostream>
+#include <algorithm>
 using namespace std;
 
 
 int main(int argc, const char * argv[]) {
     double x;
     cin >> x;
-    double l = 0, r = x;
+    double l = 0, r = max(1.0,x);
     while(r - l > 1e-6)  //保留六位小数，，比题意多两位
     {
         double mid = (l+r)/2;

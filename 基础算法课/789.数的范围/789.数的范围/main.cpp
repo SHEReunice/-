@@ -7,36 +7,51 @@
 //
 
 #include <iostream>
-
 using namespace std;
 
-int n,q,k;
-int a[100005];
+int n,m,q[100005];
 
-int main(int argc, const char * argv[]) {
-    cin >> n >> q;
-    for(int i = 0; i < n; i++)
-        cin >> a[i];
-    while(q--)
+void search1(int l, int r, int x)
+{
+    int i = l, j = r;
+    if(l >= r) return ;
+    while(l < r)
     {
-        cin >> k;
-        int l = -1, r = -1,i,j;
-        for(i = 0; i < n; i++)
-        {
-            if(a[i] == k)
-            {
-                l = i;
-                break;
-            }
-        }
-        for(j = i; j < n;j++)
-        {
-            if(a[j] == k)
-            {
-                r = j;
-            }
-        }
-        cout << l << " " << r << endl;
+        int mid = (l + r) / 2;
+        if(q[mid] >= x)
+            r = mid;
+        else l = mid + 1;
     }
+    if(q[l] != x)
+    {
+        cout << "-1 -1" << endl;
+    }
+    else
+    {
+        cout << l << " ";
+        while(i < j)
+        {
+            int mid = (i + j + 1) / 2;
+            if(q[mid] <= x) i = mid;
+            else j = mid - 1;
+        }
+        cout << j << endl;
+    }
+}
+
+
+int main()
+{
+    cin >> n >> m;
+    for(int i = 0; i < n; i++)
+        cin >> q[i];
+    while(m--)
+    {
+        int x;
+        cin >> x;
+        search1(0, n-1, x);
+    }
+    
+    
     return 0;
 }
